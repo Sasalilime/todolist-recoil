@@ -1,7 +1,5 @@
-import {useRecoilValue} from 'recoil';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
-import {todosState} from './recoil';
 
 function App() {
     return (

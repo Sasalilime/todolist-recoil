@@ -1,9 +1,10 @@
 import {useRecoilValue} from 'recoil';
 import AddTodo from './components/AddTodo';
-import {todoState} from './recoil';
+import TodoList from './components/TodoList';
+import {todosState} from './recoil';
 
 function App() {
-    const todos = useRecoilValue(todoState);
+    const todos = useRecoilValue(todosState);
 
     console.log(todos);
     return (
@@ -11,6 +12,7 @@ function App() {
             <div className='card container p-20'>
                 <h1 className='mb-20'>Todo list</h1>
                 <AddTodo />
+                <TodoList />
             </div>
         </div>
     );

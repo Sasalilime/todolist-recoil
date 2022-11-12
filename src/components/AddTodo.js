@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import {useSetRecoilState} from 'recoil';
-import {todoState} from '../recoil';
+import {todosState} from '../recoil';
 
 function AddTodo() {
-    const [inputValue, setInputValue] = useState('exemple');
-    const setTodosState = useSetRecoilState(todoState);
+    const [inputValue, setInputValue] = useState('');
+    const setTodosState = useSetRecoilState(todosState);
 
     const handleChange = (e) => {
         setInputValue(e.target.value);
@@ -26,7 +26,7 @@ function AddTodo() {
         setInputValue('');
     };
     return (
-        <div className='d-flex align-items-center'>
+        <div className='d-flex align-items-center mb-20'>
             <input onChange={handleChange} value={inputValue} type='text' className='flex-fill mr-15' />
             <button onClick={handleClick} className='btn btn-primary'>
                 Ajouter TODO

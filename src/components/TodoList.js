@@ -1,5 +1,11 @@
+import {useRecoilValue} from 'recoil';
+import {todosState} from '../recoil';
+import TodoItem from '../components/TodoItem';
+
 function TodoList() {
-  return <h2>TodoList</h2>;
+    const todos = useRecoilValue(todosState);
+
+    return <ul>{todos && todos.map((todo) => <TodoItem key={todo._id} todo={todo} />)}</ul>;
 }
 
 export default TodoList;

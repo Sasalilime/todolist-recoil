@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {useSetRecoilState} from 'recoil';
 import {todosState} from '../recoil';
 
-const TodoItem = ({todo}) => {
+const TodoItem = ({todo, handleOnClickDetails}) => {
     const [inputValue, setInputValue] = useState(todo.content);
     const setTodosState = useSetRecoilState(todosState);
 
@@ -45,6 +45,9 @@ const TodoItem = ({todo}) => {
                     </button>
                     <button onClick={() => updateTodo({...todo, edit: true})} className='btn btn-secondary mr-15'>
                         Modifier
+                    </button>
+                    <button className='btn btn-primary' onClick={handleOnClickDetails}>
+                        Détails
                     </button>
                 </>
             )}

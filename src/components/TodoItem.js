@@ -1,23 +1,21 @@
 import {useState} from 'react';
 import {useSetRecoilState} from 'recoil';
 import {todosState} from '../recoil';
+import { deleteTodoRequest, updateTodoRequest } from '../api'
 
 const TodoItem = ({todo, handleOnClickDetails}) => {
     const [inputValue, setInputValue] = useState(todo.content);
     const setTodosState = useSetRecoilState(todosState);
+    
 
-    const handleClickDone = () => {
-        setTodosState((oldTodosState) =>
-            oldTodosState.map((oldTodo) => (oldTodo._id === todo._id ? {...todo, done: !todo.done} : oldTodo))
-        );
-    };
-
-    const handleClickDelete = () => {
+    const deleteTodo = async () => {
+        await deleteTodoRequest(todo._id)
         setTodosState((oldTodosState) => oldTodosState.filter((oldTodo) => oldTodo._id !== todo._id));
     };
 
-    const updateTodo = (editTodo) => {
-        setTodosState((oldTodosState) => oldTodosState.map((oldTodo) => (oldTodo._id === todo._id ? editTodo : oldTodo)));
+    const updateTodo = async (editTodo) => {
+        const updatedTodo = await updateTodoRequest(editTodo)
+        setTodosState((oldTodosState) => oldTodosState.map((oldTodo) => (oldTodo._id === updatedTodo._id ? editTodo : oldTodo)));
     };
 
     return (
@@ -37,10 +35,10 @@ const TodoItem = ({todo, handleOnClickDetails}) => {
                     <span style={{textDecoration: todo.done && 'line-through'}} className='flex-fill mr-15'>
                         {todo.content}
                     </span>
-                    <button onClick={handleClickDone} className='btn btn-primary mr-15'>
+                    <button   onClick={() => updateTodo({ ...todo, done: !todo.done })} className='btn btn-primary mr-15'>
                         {todo.done ? 'Annuler' : 'Fait'}
                     </button>
-                    <button onClick={handleClickDelete} className='btn btn-danger mr-15'>
+                    <button onClick={deleteTodo} className='btn btn-danger mr-15'>
                         Supprimer
                     </button>
                     <button onClick={() => updateTodo({...todo, edit: true})} className='btn btn-secondary mr-15'>

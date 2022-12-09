@@ -1,11 +1,9 @@
 import { atom, selector, selectorFamily } from 'recoil'
+import { getTodosRequest } from '../api'
 
 export const todosState = atom({
   key: 'todosState',
-  default: [],
-  effects: [
-    () => {},
-  ],
+  default: getTodosRequest(),
 })
 
 export const filterState = atom({
